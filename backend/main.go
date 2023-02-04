@@ -17,6 +17,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error connecting to the database: %v", err)
 	}
+	log.Print("Successfully connected to the database.")
+
 	defer db.Close()
 
 	// Define the API routes
@@ -26,9 +28,10 @@ func main() {
 	router.HandleFunc("/tasks/{id}", api.DeleteTaskHandler).Methods("DELETE")
 
 	// Start the API server
-	err = http.ListenAndServe(":8080", router)
+	log.Print("Starting API server on :4000")
+	err = http.ListenAndServe(":4000", router)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error starting API server: %v", err)
 	}
 
 }
